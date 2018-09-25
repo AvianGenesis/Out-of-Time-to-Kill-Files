@@ -16,12 +16,11 @@ public class BulletController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         flow = 1f;
-        isActive = false;
         
         rb = GetComponent<Rigidbody2D>();
 	}
 	
-    public void CreateBullet (float spd, float ang, Vector3 pos)
+    public void DrawBullet (float spd, float ang, Vector3 pos)
     {
         speed = spd;
         angle = ang;
@@ -33,5 +32,11 @@ public class BulletController : MonoBehaviour {
         velX = speed * (float)Mathf.Sin(angle) * flow;
         velY = speed * (float)Mathf.Cos(angle) * flow;
         rb.velocity = new Vector2(velX, velY);
+
+        if(gameObject.activeInHierarchy && (transform.position.x > 9 || transform.position.x < -9 || transform.position.y > 6 || transform.position.y < -6))
+        {
+            gameObject.SetActive(false);
+            Debug.Log("Bullet destructed");
+        }
 	}
 }

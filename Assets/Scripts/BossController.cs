@@ -8,6 +8,7 @@ public class BossController : MonoBehaviour {
     public float flow;
     public float loc;
 
+    private float tick = 0;
     private GameObject controlPanel;
     //private Rigidbody2D rb;
 
@@ -16,7 +17,7 @@ public class BossController : MonoBehaviour {
         flow = 1f;
         loc = 0f;
 
-        controlPanel = Resources.Load<GameObject>("Prefabs/Boss");
+        controlPanel = GameObject.Find("Boss");
         //rb = GetComponent<Rigidbody2D>();
 	}
 	
@@ -24,6 +25,11 @@ public class BossController : MonoBehaviour {
 	void Update () {
         loc += (Mathf.PI / 200) * flow;
         transform.position = new Vector3(transform.position.x, (float)Mathf.Sin(loc) * 2, 0f);
-        controlPanel.GetComponent<BulletPatterns>().Sun1(transform.position);
+        tick++;
+        if (tick == 100)
+        {
+            Debug.Log("Firing Sun2");
+            controlPanel.GetComponent<BulletPatterns>().Shotgun1(transform.position);
+        }
 	}
 }
