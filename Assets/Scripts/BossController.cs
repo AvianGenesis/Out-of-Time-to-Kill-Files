@@ -8,12 +8,15 @@ public class BossController : MonoBehaviour {
     public float flow;
     public float loc;
 
+    private GameObject controlPanel;
     //private Rigidbody2D rb;
 
 	// Use this for initialization
 	void Start () {
         flow = 1f;
         loc = 0f;
+
+        controlPanel = Resources.Load<GameObject>("Prefabs/Boss");
         //rb = GetComponent<Rigidbody2D>();
 	}
 	
@@ -21,5 +24,6 @@ public class BossController : MonoBehaviour {
 	void Update () {
         loc += (Mathf.PI / 200) * flow;
         transform.position = new Vector3(transform.position.x, (float)Mathf.Sin(loc) * 2, 0f);
+        controlPanel.GetComponent<BulletPatterns>().Sun1(transform.position);
 	}
 }
