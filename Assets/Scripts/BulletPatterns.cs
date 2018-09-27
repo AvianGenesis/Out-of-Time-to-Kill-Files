@@ -48,24 +48,33 @@ public class BulletPatterns : MonoBehaviour {
         return soughtBullets;
     }
 
-    public void Shotgun1(Vector3 pos, Vector3 target)
+    public void Shotgun1(Vector3 pos) //All 3 bursts at once in a spread
     {
+        int bulletCount = 15;
+        int indent = bulletCount / 3;
+        Vector3 target = GameObject.Find("Player").transform.position;
         GameObject[] magazine;
-        magazine = FindBullets(30);
+        magazine = FindBullets(bulletCount);
 
-        for (int i = 0; i <= 9; i++)
+        for (int i = 0; i <= ((bulletCount / 3f) - 1); i++)
         {
-            magazine[i].GetComponent<BulletController>().DrawBullet(2f * ((i + 1f) / 10f) + 3, 2f * Mathf.PI * (7f / 9f), new Vector3(pos.x, pos.y));
+            magazine[i + 0 * indent].GetComponent<BulletController>().DrawBullet(5f,
+                                                                                 2f * Mathf.PI * (((1f / 18f) * ((i + 1f)/ (float)indent)) + (13f / 18f)),
+                                                                                 new Vector3(pos.x, pos.y));
         }
 
-        for (int i = 10; i <= 19; i++)
+        for (int i = 0; i <= ((bulletCount / 3f) - 1); i++)
         {
-            magazine[i].GetComponent<BulletController>().DrawBullet(2f * ((i - 9f) / 10f) + 3, 2f * Mathf.PI * (3f/4f), new Vector3(pos.x, pos.y));
+            magazine[i + 1 * indent].GetComponent<BulletController>().DrawBullet(4f,
+                                                                                 2f * Mathf.PI * (((1f / 18f) * ((i + 1f) / (float)indent)) + (13f / 18f)), 
+                                                                                 new Vector3(pos.x, pos.y));
         }
 
-        for (int i = 20; i <= 29; i++)
+        for (int i = 0; i <= ((bulletCount / 3f) - 1); i++)
         {
-            magazine[i].GetComponent<BulletController>().DrawBullet(2f * ((i - 19f) / 10f) + 3, 2f * Mathf.PI * (13f / 18f), new Vector3(pos.x, pos.y));
+            magazine[i + 2 * indent].GetComponent<BulletController>().DrawBullet(3f,
+                                                                                 2f * Mathf.PI * (((1f / 18f) * ((i + 1f) / (float)indent)) + (13f / 18f)),
+                                                                                 new Vector3(pos.x, pos.y));
         }
         //put 30 bullets into array
         //iterate 10 at a time, 3 times
