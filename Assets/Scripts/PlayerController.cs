@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
     public float health;
     public float flow;
@@ -15,31 +16,51 @@ public class PlayerController : MonoBehaviour {
 
     private Vector3 resetPosition;
     private Rigidbody2D rb;
+    private Animator anim;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         health = 5f;
         flow = 1f;
         speed = 7f;
 
         resetPosition = transform.position;
         rb = GetComponent<Rigidbody2D>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        anim = GetComponent<Animator>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         float inputX = Input.GetAxis("Horizontal");
         float inputY = Input.GetAxis("Vertical");
+        float fire1 = Input.GetAxis("Fire1");
+        float fire2 = Input.GetAxis("Fire2");
         velX = inputX * speed * flow;
         velY = inputY * speed * flow;
 
         rb.velocity = new Vector2(velX, velY);
 
-	}
+        if (fire1 == 1 && fire2 == 0)
+        {
+            //fire1
+            anim.SetFloat("State", 1f);
+        }
+        else if (fire1 == 0 && fire2 == 1)
+        {
+            //fire2
+            anim.SetFloat("State", 2f);
+        }
+        else
+        {
+            anim.SetFloat("State", 0f);
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Damage") || collision.gameObject.layer == LayerMask.NameToLayer("Boss"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Damage") || collision.gameObject.layer == LayerMask.NameToLayer("Boss"))
         {
             health--;
             transform.position = resetPosition;
