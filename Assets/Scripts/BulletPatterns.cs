@@ -50,7 +50,7 @@ public class BulletPatterns : MonoBehaviour {
 
     public void Shotgun1(Vector3 pos) //All 3 bursts at once in a spread
     {
-        int bulletCount = 15;
+        int bulletCount = 12;
         int indent = bulletCount / 3;
         Vector3 target = GameObject.Find("Player").transform.position;
         GameObject[] magazine;
@@ -59,21 +59,21 @@ public class BulletPatterns : MonoBehaviour {
         for (int i = 0; i <= ((bulletCount / 3f) - 1); i++)
         {
             magazine[i + 0 * indent].GetComponent<BulletController>().DrawBullet(5f,
-                                                                                 2f * Mathf.PI * (((1f / 18f) * ((i + 1f)/ (float)indent)) + (13f / 18f)),
+                                                                                 2f * Mathf.PI * (((2f * i + 1f) / (36f * (float)indent)) + (13f / 18f)),
                                                                                  new Vector3(pos.x, pos.y));
         }
 
         for (int i = 0; i <= ((bulletCount / 3f) - 1); i++)
         {
             magazine[i + 1 * indent].GetComponent<BulletController>().DrawBullet(4f,
-                                                                                 2f * Mathf.PI * (((1f / 18f) * ((i + 1f) / (float)indent)) + (13f / 18f)), 
+                                                                                 2f * Mathf.PI * (((2f * i + 1f) / (36f * (float)indent)) + (13f / 18f)),
                                                                                  new Vector3(pos.x, pos.y));
         }
 
         for (int i = 0; i <= ((bulletCount / 3f) - 1); i++)
         {
             magazine[i + 2 * indent].GetComponent<BulletController>().DrawBullet(3f,
-                                                                                 2f * Mathf.PI * (((1f / 18f) * ((i + 1f) / (float)indent)) + (13f / 18f)),
+                                                                                 2f * Mathf.PI * (((2f * i + 1f) / (36f * (float)indent)) + (13f / 18f)),
                                                                                  new Vector3(pos.x, pos.y));
         }
         //put 30 bullets into array

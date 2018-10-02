@@ -45,16 +45,16 @@ public class PlayerController : MonoBehaviour
         if (fire1 == 1 && fire2 == 0)
         {
             //fire1
-            anim.SetFloat("State", 1f);
+            anim.SetInteger("State", 1);
         }
         else if (fire1 == 0 && fire2 == 1)
         {
             //fire2
-            anim.SetFloat("State", 2f);
+            anim.SetInteger("State", 2);
         }
         else
         {
-            anim.SetFloat("State", 0f);
+            anim.SetInteger("State", 0);
         }
     }
 
