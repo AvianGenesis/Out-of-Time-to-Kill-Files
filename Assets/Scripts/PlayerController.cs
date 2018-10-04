@@ -16,7 +16,9 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 resetPosition;
     private Rigidbody2D rb;
+    private Rigidbody2D absBeamRB;
     private Animator anim;
+    private GameObject absorbBeam;
 
     // Use this for initialization
     void Start()
@@ -28,6 +30,10 @@ public class PlayerController : MonoBehaviour
         resetPosition = transform.position;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        GameObject absBeamPref = Resources.Load<GameObject>("Prefabs/AbsorbBeam");
+        absorbBeam = Instantiate<GameObject>(absBeamPref);
+        absorbBeam.SetActive(false);
+        absBeamRB = absorbBeam.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -46,6 +52,8 @@ public class PlayerController : MonoBehaviour
         {
             //fire1
             anim.SetInteger("State", 1);
+            absorbBeam.SetActive(true);
+            absorbBeam.transform.position = new Vector2(transform.position.x + 8.837f, transform.position.y);
         }
         else if (fire1 == 0 && fire2 == 1)
         {
@@ -55,6 +63,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             anim.SetInteger("State", 0);
+            absorbBeam.SetActive(false);
         }
     }
 
