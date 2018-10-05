@@ -52,27 +52,27 @@ public class BulletPatterns : MonoBehaviour {
     {
         int bulletCount = 12;
         int indent = bulletCount / 3;
-        Vector3 target = GameObject.Find("Player").transform.position;
+        //Vector3 target = GameObject.Find("Player").transform.position;
         GameObject[] magazine;
         magazine = FindBullets(bulletCount);
 
         for (int i = 0; i <= ((bulletCount / 3f) - 1); i++)
         {
-            magazine[i + 0 * indent].GetComponent<BulletController>().DrawBullet(5f,
+            magazine[i + 0 * indent].GetComponent<BulletController>().DrawBullet(5.5f,
                                                                                  2f * Mathf.PI * (((2f * i + 1f) / (36f * (float)indent)) + (13f / 18f)),
                                                                                  new Vector3(pos.x, pos.y));
         }
 
         for (int i = 0; i <= ((bulletCount / 3f) - 1); i++)
         {
-            magazine[i + 1 * indent].GetComponent<BulletController>().DrawBullet(4f,
+            magazine[i + 1 * indent].GetComponent<BulletController>().DrawBullet(4.5f,
                                                                                  2f * Mathf.PI * (((2f * i + 1f) / (36f * (float)indent)) + (13f / 18f)),
                                                                                  new Vector3(pos.x, pos.y));
         }
 
         for (int i = 0; i <= ((bulletCount / 3f) - 1); i++)
         {
-            magazine[i + 2 * indent].GetComponent<BulletController>().DrawBullet(3f,
+            magazine[i + 2 * indent].GetComponent<BulletController>().DrawBullet(3.5f,
                                                                                  2f * Mathf.PI * (((2f * i + 1f) / (36f * (float)indent)) + (13f / 18f)),
                                                                                  new Vector3(pos.x, pos.y));
         }
@@ -94,9 +94,9 @@ public class BulletPatterns : MonoBehaviour {
         GameObject[] magazine;
         magazine = FindBullets(36);
 
-        for (int i = 0; i <= 71; i++)
+        for (int i = 0; i <= 35; i++)
         {
-            magazine[i].GetComponent<BulletController>().DrawBullet(7f, 2f * Mathf.PI * ((i +1f) / 36f), new Vector3(pos.x, pos.y));
+            magazine[i].GetComponent<BulletController>().DrawBullet(6f, 2f * Mathf.PI * ((i +1f) / 36f), new Vector3(pos.x, pos.y));
         }
     }
 
@@ -107,12 +107,12 @@ public class BulletPatterns : MonoBehaviour {
 
         for (int i = 0; i <= 35; i++)
         {
-            magazine[i].GetComponent<BulletController>().DrawBullet(6f, 2f * Mathf.PI * ((i + 1f) / 36f), new Vector3(pos.x, pos.y));
+            magazine[i].GetComponent<BulletController>().DrawBullet(5f, 2f * Mathf.PI * ((i + 1f) / 36f), new Vector3(pos.x, pos.y));
         }
 
         for (int i = 36; i <= 53; i++)
         {
-            magazine[i].GetComponent<BulletController>().DrawBullet(7f, 2f * Mathf.PI * ((i + 1f) / 18f), new Vector3(pos.x, pos.y));
+            magazine[i].GetComponent<BulletController>().DrawBullet(6f, 2f * Mathf.PI * ((i + 1f) / 18f), new Vector3(pos.x, pos.y));
         }
     }
 }

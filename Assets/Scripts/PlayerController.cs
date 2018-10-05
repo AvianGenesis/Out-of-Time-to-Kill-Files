@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public float velY;
     public float score;
     public float energy;
+    private int invulTick;
+    private bool invul;
 
     private Vector3 resetPosition;
     private Rigidbody2D rb;
@@ -26,6 +28,7 @@ public class PlayerController : MonoBehaviour
         health = 5f;
         flow = 1f;
         speed = 7f;
+        invul = false;
 
         resetPosition = transform.position;
         rb = GetComponent<Rigidbody2D>();
@@ -48,6 +51,16 @@ public class PlayerController : MonoBehaviour
 
         rb.velocity = new Vector2(velX, velY);
 
+        if (invul)
+        {
+            invulTick++;
+            if(invulTick == 120)
+            {
+                invul = false;
+                invulTick = 0;
+            }
+        }
+
         if (fire1 == 1 && fire2 == 0)
         {
             //fire1
@@ -67,12 +80,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Damage") || collision.gameObject.layer == LayerMask.NameToLayer("Boss"))
+        if ((collision.gameObject.layer == LayerMask.NameToLayer("Damage") || collision.gameObject.layer == LayerMask.NameToLayer("Boss")) && !invul)
         {
             health--;
             transform.position = resetPosition;
+            invul = true;
         }
     }
 }

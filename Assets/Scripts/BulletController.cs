@@ -36,7 +36,24 @@ public class BulletController : MonoBehaviour {
         if(gameObject.activeInHierarchy && (transform.position.x > 9 || transform.position.x < -9 || transform.position.y > 6 || transform.position.y < -6))
         {
             gameObject.SetActive(false);
+            flow = 1f;
             Debug.Log("Bullet destructed");
         }
 	}
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Absorb"))
+        {
+            flow = 1.3f;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Absorb"))
+        {
+            flow = 1f;
+        }
+    }
 }
