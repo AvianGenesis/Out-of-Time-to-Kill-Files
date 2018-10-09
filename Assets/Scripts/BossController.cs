@@ -12,13 +12,16 @@ public class BossController : MonoBehaviour {
     private float tick = 0;
     private GameObject controlPanel;
     private Text bossHP;
+    private bool absB, slDnB;
     //private Rigidbody2D rb;
 
 	// Use this for initialization
 	void Start () {
         flow = 1f;
         loc = 0f;
-        health = 30000f;
+        health = 60000f;
+        absB = false;
+        slDnB = false;
 
         controlPanel = GameObject.Find("Boss");
         bossHP = GameObject.Find("Boss HP").GetComponent<Text>();
@@ -29,13 +32,13 @@ public class BossController : MonoBehaviour {
 	void Update () {
         loc += (Mathf.PI / 200) * flow;
         transform.position = new Vector3(transform.position.x, (float)Mathf.Sin(loc) * 2, 0f);
-        health = health - (1 * flow);
+        health = health - (4 * flow);
 
         tick = tick + (1 * flow);
         if (tick > 230)
         {
             tick = 0;
-            int atkNum = Random.Range(0, 2);
+            int atkNum = Random.Range(0, 3);
             if (atkNum == 0)
             {
                 controlPanel.GetComponent<BulletPatterns>().Sun1(transform.position);
@@ -45,7 +48,31 @@ public class BossController : MonoBehaviour {
             {
                 controlPanel.GetComponent<BulletPatterns>().Shotgun1(transform.position);
             }
+
+            if (atkNum == 2)
+            {
+                controlPanel.GetComponent<BulletPatterns>().Sun2(transform.position);
+            }
         }
+
+        //Trigger detection
+        if(absB && slDnB)
+        {
+            flow = 1f;
+        }
+        else if(absB)
+        {
+            flow = 2f;
+        }
+        else if(slDnB)
+        {
+            flow = 0.75f;
+        }
+        else
+        {
+            flow = 1f;
+        }
+
         bossHP.text = "Boss HP: " + health;
 	}
 
@@ -54,23 +81,25 @@ public class BossController : MonoBehaviour {
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Absorb"))
         {
-            flow = 2f;
+            absB = true;
+        }
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("SlowDown"))
+        {
+            slDnB = true;
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Absorb"))
-        {
-            //health--;
-        }
-    }
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Absorb"))
         {
-            flow = 1f;
+            absB = false;
+        }
+        if (collision.gameObject.layer == LayerMask.NameToLayer("SlowDown"))
+        {
+            slDnB = false;
         }
     }
 }

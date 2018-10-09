@@ -20,12 +20,6 @@ public class BulletPatterns : MonoBehaviour {
 
     }
 
-
-    private void Update()
-    {
-
-    }
-
     private GameObject[] FindBullets(int numToFind)
     {
 
