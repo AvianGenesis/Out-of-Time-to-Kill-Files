@@ -30,6 +30,9 @@ public class BulletController : MonoBehaviour
         speed = spd;
         angle = ang;
         transform.position = pos;
+        flow = 1f;
+        absB = false;
+        slDnB = false;
     }
 
     // Update is called once per frame
@@ -41,8 +44,8 @@ public class BulletController : MonoBehaviour
 
         if (gameObject.activeInHierarchy && (transform.position.x > 9 || transform.position.x < -9 || transform.position.y > 6 || transform.position.y < -6))
         {
-            gameObject.SetActive(false);
             flow = 1f;
+            gameObject.SetActive(false);
         }
 
         //Trigger detection

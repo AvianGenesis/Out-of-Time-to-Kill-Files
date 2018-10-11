@@ -76,11 +76,15 @@ public class BulletPatterns : MonoBehaviour {
         //aimed directly to the left
     }
 
-    public void Swirl1()
+    public void Swirl1(Vector3 pos)
     {
-        //put 36 bullets
-        //iterate through, activating one every few frames
-        //wave pattern between 0 and 180 to the left
+        GameObject[] magazine;
+        magazine = FindBullets(36);
+
+        for(int i = 0; i <= 35; i++)
+        {
+            magazine[i].GetComponent<BulletController>().DrawBullet(6f, Mathf.PI * ((i + 1f) / 36f) + Mathf.PI, new Vector3(pos.x, pos.y));
+        }
     }
 
     public void Sun1(Vector3 pos)
@@ -90,7 +94,7 @@ public class BulletPatterns : MonoBehaviour {
 
         for (int i = 0; i <= 35; i++)
         {
-            magazine[i].GetComponent<BulletController>().DrawBullet(6f, 2f * Mathf.PI * ((i +1f) / 36f), new Vector3(pos.x, pos.y));
+            magazine[i].GetComponent<BulletController>().DrawBullet(3f, 2f * Mathf.PI * ((i +1f) / 36f), new Vector3(pos.x, pos.y));
         }
     }
 

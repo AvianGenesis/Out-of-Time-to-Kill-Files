@@ -30,15 +30,15 @@ public class BossController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        loc += (Mathf.PI / 200) * flow;
+        loc += (Mathf.PI / 150) * flow;
         transform.position = new Vector3(transform.position.x, (float)Mathf.Sin(loc) * 2, 0f);
         health = health - (4 * flow);
 
-        tick = tick + (1 * flow);
-        if (tick > 230)
+        tick += (1 * flow);
+        if (tick > (230f - (180f * (1f - (health / 60000f)))))
         {
             tick = 0;
-            int atkNum = Random.Range(0, 3);
+            int atkNum = Random.Range(0, 4);
             if (atkNum == 0)
             {
                 controlPanel.GetComponent<BulletPatterns>().Sun1(transform.position);
@@ -52,6 +52,11 @@ public class BossController : MonoBehaviour {
             if (atkNum == 2)
             {
                 controlPanel.GetComponent<BulletPatterns>().Sun2(transform.position);
+            }
+
+            if (atkNum == 3)
+            {
+                controlPanel.GetComponent<BulletPatterns>().Swirl1(transform.position);
             }
         }
 

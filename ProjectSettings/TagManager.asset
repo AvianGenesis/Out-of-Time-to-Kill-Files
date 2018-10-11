@@ -41,3 +41,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 1431162461
+    locked: 0
+  - name: Parallax
+    uniqueID: 171560023
+    locked: 0
+  - name: Bullets
+    uniqueID: 1322673165
+    locked: 0
+  - name: Attacks
+    uniqueID: 154238773
+    locked: 0
+  - name: Boss
+    uniqueID: 1911403385
+    locked: 0
+  - name: Player
+    uniqueID: 3323747453
+    locked: 0

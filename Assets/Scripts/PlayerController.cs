@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        health = 5f;
+        health = 3f;
         flow = 1f;
         speed = 7f;
         invul = false;
@@ -65,7 +65,9 @@ public class PlayerController : MonoBehaviour
         GUILayout.EndArea();
     }
 
-    // Update is called once per frame
+    /*************************/
+    /*         UPDATE        */
+    /*************************/
     void Update()
     {
         float inputX = Input.GetAxis("Horizontal");
@@ -77,6 +79,7 @@ public class PlayerController : MonoBehaviour
 
         rb.velocity = new Vector2(velX, velY);
 
+        //Invincibility frames
         if (invul)
         {
             invulTick++;
@@ -113,7 +116,7 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetInteger("State", 0);
             absorbBeam.transform.position = new Vector2(100f, 100f);
-            //absorbBeam.SetActive(false);
+            absorbBeam.SetActive(false);
             fire2Tick = 0;
         }
 
@@ -127,6 +130,11 @@ public class PlayerController : MonoBehaviour
                 //slowDownAOE1.SetActive(false);
             }
         }
+
+        if(health == 0)
+        {
+            GetComponent<SceneChange>().LoadStartScreen();
+        }
     }
 
 
@@ -136,6 +144,7 @@ public class PlayerController : MonoBehaviour
         if ((collision.gameObject.layer == LayerMask.NameToLayer("Damage") || collision.gameObject.layer == LayerMask.NameToLayer("Boss")) && !invul)
         {
             health--;
+            GetComponent<AudioSource>().Play();
             transform.position = resetPosition;
             invul = true;
         }
